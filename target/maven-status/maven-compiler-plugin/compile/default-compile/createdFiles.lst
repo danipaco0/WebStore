@@ -1,0 +1,17 @@
+com\devapp\devapp\Repos\OrdersRepo.class
+com\devapp\devapp\Services\UserService.class
+com\devapp\devapp\Models\ItemCart.class
+com\devapp\devapp\Services\ItemCartService.class
+com\devapp\devapp\Services\ShoesService.class
+com\devapp\devapp\Models\Shoes.class
+com\devapp\devapp\Controllers\LoginController.class
+com\devapp\devapp\Controllers\ClientController.class
+com\devapp\devapp\DevappApplication.class
+com\devapp\devapp\Models\User.class
+com\devapp\devapp\Services\OrdersService.class
+com\devapp\devapp\Controllers\CartController.class
+com\devapp\devapp\Controllers\ShoesController.class
+com\devapp\devapp\Repos\UserRepo.class
+com\devapp\devapp\Controllers\AdminController.class
+com\devapp\devapp\Repos\ItemCartRepo.class
+com\devapp\devapp\Repos\ShoesRepo.class

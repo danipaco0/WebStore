@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cart Manager</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .center-content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">The Sneaker Store</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form action="/clientHome" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Home</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/ordersManager" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Orders</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/logout" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <div th:if="${shoesMatch.empty}">
+                <p class="text-center">Nothing to see here...</p>
+            </div>
+            <div th:unless="${shoesMatch.empty}">
+                <h2 class="mb-3">Cart</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="shoes:${shoesMatch}">
+                            <td th:text="${shoes.name}"></td>
+                            <td>
+                                <img th:src="@{'/images/' + ${shoes.image}}" alt="Shoes Image" style="width:150px; height: 150px;" class="img-thumbnail">
+                            </td>
+                            <td th:text="${shoes.price}"></td>
+                            <td>
+                                <form action="/cartManager/deleteItem" method="post">
+                                    <input type="hidden" name="id" th:value="${shoes.id}">
+                                    <input type="hidden" name="cart" th:value="${cartId}">
+                                    <button type="submit" class ="btn btn-warning">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right">
+                    <h4>Total Price: <span th:text="${totalPrice}"></span></h4>
+                    <form action="/cartManager/placeOrder" method="post">
+                        <input type="hidden" name="cart" th:value="${cartId}">
+                        <input type="hidden" name="price" th:value="${totalPrice}">.
+                        <button type="submit" class="btn btn-primary">Order items</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Include Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

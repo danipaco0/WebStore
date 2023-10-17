@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Orders Manager</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">The Sneaker Store</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form action="/clientHome" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Home</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/cartManager" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Cart</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/logout" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <h2 class="mb-3">Orders</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Items</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order:${orders}">
+                        <td th:text="${order.id}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="item : ${order.shoesName}" th:text="${item}"></li>
+                            </ul>
+                        </td> 
+                        <td th:text="${order.price}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Include Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

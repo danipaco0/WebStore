@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>System Manager</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">The Sneaker Store</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form action="/logout" method="post">
+                            <button class="btn btn-link nav-link" type="submit">Log Out</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="mb-3">Users</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user:${users}" th:unless="${user.isAdmin}">
+                                <td th:text="${user.id}"></td>
+                                <td th:text="${user.username}"></td>
+                                <td>
+                                    <form action="/adminHome/deleteUser" method="post">
+                                        <input type="hidden" name="id" th:value="${user.id}">
+                                        <button type="submit" class ="btn btn-warning">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-3">Orders</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order Number</th>
+                                <th>User ID</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="order: ${orders}">
+                                <td th:text="${order.id}"></td>
+                                <td th:text="${order.userId}"></td>
+                                <td th:text="${order.price}"></td>
+                                <td>
+                                    <form action="/adminHome/deleteOrder" method="post">
+                                        <input type="hidden" name="id" th:value="${order.id}">
+                                        <button type="submit" class ="btn btn-warning">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h2 class="mt-5">Shoes</h2>
+            <div class="d-flex justify-content-between mb-3">
+                <form action="/adminHome/addShoes" method="post">
+                    <button type="submit" class="btn btn-primary">Add Shoes</button>
+                </form>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th></th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="shoes:${shoes}">
+                        <td th:text="${shoes.id}"></td>
+                        <td th:text="${shoes.name}"></td>
+                        <td>
+                            <img th:src="@{'/images/' + ${shoes.image}}" alt="Shoes Image" style="width:150px; height: 150px;" class="img-thumbnail">
+                        </td>
+                        <td th:text="${shoes.price}"></td>
+                        <td>
+                            <form th:action="@{/adminHome/editShoes}" method="post">
+                                <input type="hidden" name="id" th:value="${shoes.id}">
+                                <button type="submit" class ="btn btn-primary">Edit</button>
+                            </form>
+                            <form action="/adminHome/deleteShoes" method="post">
+                                <input type="hidden" name="id" th:value="${shoes.id}">
+                                <button type="submit" class ="btn btn-warning">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Include Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

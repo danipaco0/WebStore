@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cart Manager</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .center-content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+        </style>
+    </head>
+    <body>
+        <form class="form-inline my-2 my-lg-0 ml-auto">
+            <form action="/clientHome" method="post">
+                <button class="btn btn-link nav-link" type="submit">Home</button>
+            </form>
+            <form action="/ordersManager" method="post">
+                <button class="btn btn-link nav-link" type="submit">Orders</button>
+            </form>
+            <button class="btn btn-link nav-link" type="button">Cart</button>
+        </form>
+        <div class="container mt-5 center-content">
+            <p class="text-center">Nothing to see here...</p>
+        </div>
+        <!-- Include Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
